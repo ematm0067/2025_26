@@ -1,0 +1,12 @@
+exported from the R library mstknnclust where it is dslanguages; it is
+the Dyen, Kruskal, and Black (DKB) dataset
+
+Dyen, I., Kruskal, J. B., & Black, P. (1992). An Indoeuropean
+classification: A lexicostatistical experiment. Transactions of the
+American Philosophical society, 82(5), iii-132.
+
+The original dataset used a word now recognized as a slur in the
+description of one language, I have changed this to RomaniGK, I
+believe this was the Romani spoken in Greece and not
+Romano-Greek. However it also lists Vlach, which is also a Romani
+language.

@@ -1,0 +1,21 @@
+https://github.com/vincentarelbundock/Rdatasets/blob/master/csv/Stat2Data/Hawks.csv
+
+https://rdrr.io/rforge/Stat2Data/man/Hawks.html
+
+from Stat2Data:
+
+Details
+
+Students and faculty at Cornell College in Mount Vernon, Iowa,
+collected the data over many years at the hawk blind at Lake MacBride
+near Iowa City, Iowa. The data set that we are analyzing here is a
+subset of the original data set, using only those species for which
+there were more than 10 observations. Data were collected on random
+samples of three different species of hawks: Red-tailed,
+Sharp-shinned, and Cooper's hawks.
+
+Source
+
+Many thanks to the late Professor Bob Black at Cornell College for
+sharing these data with us.
+
