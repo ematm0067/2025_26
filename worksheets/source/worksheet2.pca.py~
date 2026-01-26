@@ -1,0 +1,64 @@
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+
+# ---------------------------
+# 1) Load the CSV
+# ---------------------------
+df = pd.read_csv("ws2_india.csv")
+
+scheduled_cols = [
+    "Assamese","Bengali","Bodo","Dogri","Gujarati","Hindi","Kannada","Kashmiri","Konkani",
+    "Maithili","Malayalam","Manipuri","Marathi","Nepali","Odia","Punjabi","Sanskrit",
+    "Santali","Sindhi","Tamil","Telugu","Urdu"
+]
+
+missing = [c for c in scheduled_cols if c not in df.columns]
+if missing:
+    raise ValueError(f"Missing scheduled-language columns: {missing}")
+
+X = df[scheduled_cols].to_numpy(dtype=float)
+
+# ---------------------------
+# 2) PCA on correlation matrix
+# ---------------------------
+mu = X.mean(axis=0)
+sd = X.std(axis=0, ddof=1)
+sd[sd == 0] = 1.0
+Z = (X - mu) / sd
+
+R = np.cov(Z, rowvar=False)
+eigvals, eigvecs = np.linalg.eigh(R)
+
+idx = np.argsort(eigvals)[::-1]
+eigvals = eigvals[idx]
+eigvecs = eigvecs[:, idx]
+
+scores = Z @ eigvecs  # rows = regions, cols = PCs
+
+# ---------------------------
+# 3) Print PC1/PC2 scores table
+# ---------------------------
+out = pd.DataFrame({
+    "Region": df["Region"].astype(str),
+    "PC1": scores[:, 0],
+    "PC2": scores[:, 1],
+})
+
+# Show the whole thing (or first 50 if you prefer)
+pd.set_option("display.max_rows", None)
+pd.set_option("display.width", 140)
+print(out.to_string(index=False))
+
+# ---------------------------
+# 4) (Optional) quick scatter for reference
+# ---------------------------
+plt.figure()
+plt.scatter(out["PC1"], out["PC2"])
+for i, r in enumerate(out["Region"]):
+    plt.text(out["PC1"].iat[i], out["PC2"].iat[i], r, fontsize=8)
+plt.xlabel("PC1")
+plt.ylabel("PC2")
+plt.title("PC1 vs PC2 (correlation PCA)")
+plt.tight_layout()
+plt.show()

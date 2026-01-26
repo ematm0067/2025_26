@@ -1,0 +1,183 @@
+\documentclass[a4paper,12pt]{article}
+\usepackage{hyperref}
+\usepackage{geometry}
+\geometry{margin=1in}
+\usepackage{amsmath}
+\title{Worksheet 2}
+\author{Conor Houghton}
+\date{}
+
+\begin{document}
+
+\maketitle
+
+\section{Introduction}
+
+There are two main tasks in this worksheet; the first is fairly simple, take the matrix
+\begin{equation}
+  A=\begin{pmatrix}6&-2\\-2&9\end{pmatrix}
+\end{equation}
+and work out its eigenvectors and eigenvalues, write it in the form
+$PDP^{\mathsf T}$ and check by multiplying that out that it gives back
+the origin matrix.
+
+\begin{equation}
+A=\begin{pmatrix}6&-2\\-2&9\end{pmatrix}.
+\end{equation}
+
+\section*{Eigenvalues}
+Compute the characteristic polynomial:
+\begin{equation}
+\det(A-\lambda I)
+=\det\begin{pmatrix}6-\lambda & -2\\ -2 & 9-\lambda\end{pmatrix}
+=(6-\lambda)(9-\lambda)-(-2)(-2).
+\end{equation}
+So
+\begin{equation}
+\det(A-\lambda I)=(6-\lambda)(9-\lambda)-4
+=54-15\lambda+\lambda^2-4
+=\lambda^2-15\lambda+50.
+\end{equation}
+Solve
+\begin{equation}
+\lambda^2-15\lambda+50=0.
+\end{equation}
+The discriminant is
+\begin{equation}
+\Delta = 15^2-4\cdot 50=225-200=25,
+\end{equation}
+hence
+\begin{equation}
+\lambda=\frac{15\pm \sqrt{25}}{2}=\frac{15\pm 5}{2}.
+\end{equation}
+Therefore,
+\begin{equation}
+\lambda_1=10,\qquad \lambda_2=5.
+\end{equation}
+
+\section*{Eigenvectors}
+\subsection*{Eigenvector for $\lambda_1=10$}
+Solve $(A-10I)v=0$:
+\begin{equation}
+A-10I=\begin{pmatrix}6-10&-2\\-2&9-10\end{pmatrix}
+=\begin{pmatrix}-4&-2\\-2&-1\end{pmatrix}.
+\end{equation}
+Let $v=\begin{pmatrix}x\\y\end{pmatrix}$. Then
+\begin{equation}
+-4x-2y=0 \quad\Longleftrightarrow\quad 2x+y=0 \quad\Longleftrightarrow\quad y=-2x.
+\end{equation}
+Take $x=1$, giving an eigenvector
+\begin{equation}
+v_1=\begin{pmatrix}1\\-2\end{pmatrix}.
+\end{equation}
+
+\subsection*{Eigenvector for $\lambda_2=5$}
+Solve $(A-5I)v=0$:
+\begin{equation}
+A-5I=\begin{pmatrix}6-5&-2\\-2&9-5\end{pmatrix}
+=\begin{pmatrix}1&-2\\-2&4\end{pmatrix}.
+\end{equation}
+Then
+\begin{equation}
+x-2y=0 \quad\Longleftrightarrow\quad x=2y.
+\end{equation}
+Take $y=1$, giving an eigenvector
+\begin{equation}
+v_2=\begin{pmatrix}2\\1\end{pmatrix}.
+\end{equation}
+
+\section*{Orthonormal eigenvectors}
+Normalize $v_1$ and $v_2$:
+\begin{equation}
+\|v_1\|=\sqrt{1^2+(-2)^2}=\sqrt{5},\qquad
+\|v_2\|=\sqrt{2^2+1^2}=\sqrt{5}.
+\end{equation}
+So the unit eigenvectors are
+\begin{equation}
+u_1=\frac{1}{\sqrt{5}}\begin{pmatrix}1\\-2\end{pmatrix},\qquad
+u_2=\frac{1}{\sqrt{5}}\begin{pmatrix}2\\1\end{pmatrix}.
+\end{equation}
+(And indeed $u_1^\top u_2=\frac{1}{5}(1\cdot 2 + (-2)\cdot 1)=0$.)
+
+\section*{Spectral decomposition $A = P D P^\top$}
+Let
+\begin{equation}
+P=\begin{pmatrix} \,u_1 & u_2\, \end{pmatrix}
+=\frac{1}{\sqrt{5}}
+\begin{pmatrix}
+1 & 2\\
+-2 & 1
+\end{pmatrix},
+\qquad
+D=\begin{pmatrix}
+10 & 0\\
+0 & 5
+\end{pmatrix}.
+\end{equation}
+Then $P$ is orthogonal ($P^\top P=I$) and
+\begin{equation}
+A = P D P^\top.
+\end{equation}
+
+\section*{Check by multiplication}
+First compute
+\begin{equation}
+P D
+=\frac{1}{\sqrt{5}}
+\begin{pmatrix}
+1 & 2\\
+-2 & 1
+\end{pmatrix}
+\begin{pmatrix}
+10 & 0\\
+0 & 5
+\end{pmatrix}
+=
+\frac{1}{\sqrt{5}}
+\begin{pmatrix}
+10 & 10\\
+-20 & 5
+\end{pmatrix}.
+\end{equation}
+Now multiply by $P^\top$:
+\begin{equation}
+PDP^\top
+=\frac{1}{\sqrt{5}}
+\begin{pmatrix}
+10 & 10\\
+-20 & 5
+\end{pmatrix}
+\cdot
+\frac{1}{\sqrt{5}}
+\begin{pmatrix}
+1 & -2\\
+2 & 1
+\end{pmatrix}
+=
+\frac{1}{5}
+\begin{pmatrix}
+10\cdot 1+10\cdot 2 & 10\cdot(-2)+10\cdot 1\\
+-20\cdot 1+5\cdot 2 & -20\cdot(-2)+5\cdot 1
+\end{pmatrix}.
+\end{equation}
+So
+\begin{equation}
+PDP^\top
+=\frac{1}{5}
+\begin{pmatrix}
+30 & -10\\
+-10 & 45
+\end{pmatrix}
+=
+\begin{pmatrix}
+6 & -2\\
+-2 & 9
+\end{pmatrix}
+=A,
+\end{equation}
+as required.
+
+
+
+
+\end{document}
